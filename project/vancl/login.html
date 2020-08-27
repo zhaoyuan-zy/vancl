@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/login.css">
+	</head>
+	<body>
+		<div id="login-logo" class="safe">
+			<img src="img/logo18546.png">
+			<span><a href="#">帮助</a></span>
+		</div>
+		<form action="index.html" class="safe">
+			<div id="login-content" class="safe">
+				<h1>凡客Vancl登录<span>没有账户免费<a href="regist.html" style="color: #CE6064;">注册</a></span></h1>
+
+				<div id="login-left">
+					<img src="./img/login120412_newlogo.jpg">
+				</div>
+				<div id="login-right">
+					<div id="tag">
+						<ul>
+							<li style="border-right: none;">普通登录</li>
+							<li>快速登录</li>
+						</ul>
+					</div>
+					<div id="shows-normal">
+						<ol>
+							<li style="margin-top:30px;"><input type="text" placeholder="请输入用户名"><span></span></li>
+							<li><input type="text" placeholder="请输入密码"><span></span></li>
+							<li style="margin-top: 10px;"><a href="#">找回密码</a></li>
+							<li><input type="button" name="" value="登录"></li>
+						</ol>	
+					</div>
+					
+					
+					<div id="shows-speed">
+						<ol>
+							<li><input type="text" name="" value="" placeholder="请输入用户名"><h2>获取短信验证码</h2><p>请输入</p></li>
+							<li><input type="text" name="" value="" placeholder="请输入密码"><span></span><em>看不清?换一张</em><p>请输入</p></li>
+							<li><input type="text" name="" placeholder="请输入手机验证码"><p>请输入</p></li>
+							<li><input type="button" name="" value="登录"></li>
+						</ol>	
+					</div>
+					
+					
+					<div id="shows-bottom">
+						<h3>使用合作网站账号登录凡客</h3>
+						<p>
+							<a href="#"></a>
+							<a href="#"></a>
+							<a href="#"></a>
+							<a href="#"></a>
+							<a href="#"></a>
+							<a href="#"></a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</form>
+		<footer class="safe">
+			<div id="bottom">
+				<p>Copyright 2007 - 2020 vancl.com All Right Reserved京ICP证100557号 京公网安备11011502002400号 出版物经营许可证新出发京批字第直110138号</p>
+			</div>
+			<div id="footer-img" class="safe">
+				<a href="#"></a>
+				<a href="#"></a>
+				<a href="#"></a>
+				<a href="#"></a>
+			</div>
+		</footer>
+	</body>
+</html>
+<script src="js/jQuery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#tag ul li").eq(0).click(function(){
+			$(this).css({backgroundColor:"#b42025",color:"#fff"}).next().css({backgroundColor:"#fff",color:"black"});
+			console.log($(this).next().html());
+			$("#shows-normal").css({display:"block"});
+			$("#shows-speed").css({display:"none"});
+		});
+		$("#tag ul li").eq(1).click(function(){
+			$(this).css({backgroundColor:"#b42025",color:"#fff"}).prev().css({backgroundColor:"#fff",color:"black"});
+			console.log($(this).prev().html());
+			$("#shows-normal").css({display:"none",backgroundColor:"none"});
+			$("#shows-speed").css({display:"block"});
+		});	
+	});
+	
+	
+	//普通登录
+	let oInputph = document.querySelectorAll("#shows-normal ol input")[0];
+	let oInputpw = document.querySelectorAll("#shows-normal ol input")[1];
+	let loginBtn = document.querySelectorAll("#shows-normal ol input")[2];
+	let oSpan = document.querySelectorAll("#shows-normal ol li span");
+	let flagPhone = false;
+	let flagPwd = false;
+	
+	loginBtn.onclick = function(){
+		let xhr = new XMLHttpRequest();
+		xhr.open("get", "php/login.php?userphone="+oInputph.value+"&userpwd="+oInputpw.value, true);
+		xhr.onreadystatechange = function(){
+		if(xhr.status == 200 && xhr.readyState == 4){
+			fun(xhr.responseText);
+		}
+	}
+	xhr.send();
+		
+		// if(oInputph.value == ""){
+		// 	oSpan[0].style.display = "block";
+		// 	oSpan[0].innerHTML = "用户名不能为空"	;	
+		// 	flagPhone = false;
+		// }else{
+		// 	oSpan[0].style.display = "none";
+		// 	flagPhone = true;
+		// }
+		// if(oInputpw.value == ""){
+		// 	oSpan[1].style.display = "block";
+		// 	oSpan[1].innerHTML = "密码不能为空";	
+		// 	flagPwd = false;
+		// }else{
+		// 	oSpan[1].style.display = "none";
+		// 	flagPwd = true;
+		// }
+		
+		
+		function fun(resTest){
+			if(resTest == "1"){
+				location.href = "index.html";
+				// document.cookie = "name='';expires=-1";
+				let ss = sessionStorage;
+				ss.setItem("name",oInputph.value);
+				window.history.back(-1);
+			}
+			else if(resTest=="0" && flagPhone == true && flagPwd == true){
+				oSpan[1].style.display = "block";
+				oSpan[1].innerHTML = "账户不存在";	
+			}
+		}
+	}
+	
+	
+	
+	
+	//验证码
+	let ologinY1 = document.querySelector("#shows-speed ol li h2");
+	let ologinY2 = document.querySelector("#shows-speed ol li span");
+	
+	var str = "";
+	randomNum();
+	ologinY2.innerHTML = str;
+	ologinY1.onclick= function(){
+		randomNum();
+		this.innerHTML= str;
+	}
+	ologinY2.onclick= function(){
+		randomNum();
+		this.innerHTML = str;
+	}
+	
+	function randomNum(){
+		var arr = "1234567890abcdefghlimnopqrstuvwxyz";
+		str="";
+			for (var i = 0; i < 6; i++) {
+				var a = arr.charAt(Math.round(Math.random() * 35));
+				str += a;
+			}
+			 return str;
+	}
+	
+	
+	
+	//快速登录
+	// let oInputsh = document.querySelectorAll("#shows-speed ol input");
+	// let oP = document.querySelectorAll("#shows-speed ol p");
+	// let oH = document.querySelector("#shows-speed ol h2");
+	// let oSpans = document.querySelector("#shows-speed ol li span");
+	// oInputsh[3].onclick = function(){
+	// 	let xhr1 = new XMLHttpRequest();
+	// 	xhr1.open("get", "php/login.php?userphone="+oInputsh[0].value, true);
+	// 	xhr1.onreadystatechange = function(){
+	// 	if(xhr1.status == 200 && xhr1.readyState == 4){
+	// 		fun(xhr1.responseText);
+	// 	}
+	// }
+	// xhr1.send();
+		
+	// 	flagPhones = false;
+	// 	flagPwds = false;
+	// 	if(oInputsh[0].value){
+	// 		flagPhone1 = true;
+	// 	}else{
+	// 		oP[2].style.display = "block";
+	// 		oP[2].innerHTML = "请输入有效的手机号";	
+	// 		flagPhone1 = false;
+			
+	// 	}
+		
+	// 	if(oInputsh[1].value == ""){
+	// 		oP[1].style.display = "block";
+	// 		oP[1].innerHTML = "请输入验证码";	
+	// 		flagPhone1 = false;
+	// 	 }else{
+	// 		oP[1].style.display = "none";
+	// 		flagPwd1 = true;
+	// 	}
+		
+	// 	if(oInputsh[2].value == ""){
+	// 		oP[0].style.display = "block";
+	// 		oP[0].innerHTML = "请获取手机验证码";	
+	// 		flagPhone1 = false;
+	// 	}
+	// 	else{
+	// 		oP[0].style.display = "none";
+	// 		flagPwd1 = true;
+	// 	 }
+	// }
+	// function fun(resTests){
+	// 		if(resTests == "1"){
+	// 			location.href = "index.html";
+	// 		}
+	// 	}
+</script>

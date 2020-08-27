@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/header.css">
+		<link rel="stylesheet" type="text/css" href="css/footer.css">
+		<link rel="stylesheet" type="text/css" href="css/detail.css">
+		<link rel="stylesheet" type="text/css" href="font1/iconfont.css">
+	</head>
+	<body>
+		<header></header>
+		<div id="detail-content">
+			<div id="detail-head">
+				<a href="index.html">首页</a>
+				<span>></span>
+				<a href="#">男装</a>
+				<span>></span>
+				<a href="#">POLO衫</a>
+				<span>></span>
+				<a href="#">短袖POLO衫</a>
+				<span>></span>
+				<a href="#">POLO衫 本布衬衫领 男款</a>
+
+			</div>
+			<div id="text">
+				<h2><span>POLO衫 本布衬衫领 男款 </span><i></i></h2>
+			</div>
+			<div id="detail-box">
+				<div id="detail-left">
+					<div id="smallImg">
+						<ul>
+							<li><span></span></li>
+							<li><span></span></li>
+							<li><span></span></li>
+							<li><span></span></li>
+						</ul>
+					</div>
+				</div>
+				<div id="detail-middle">
+					<div id="small-box">
+						<div id="mask"></div>
+					</div>
+					<div id="big-box"></div>
+				</div>
+			</div>
+			<div id="detail-right">
+				<div id="cuxiaoPrice">
+					<span class="tehuimoney"><span>特惠价</span>
+						<span>￥<strong>98.00</strong></span>
+						<span class="change-price">充值后相当于：￥<i>49.00</i></span>
+					</span>
+					<a href="#">充100返100，点击充值</a>
+				</div>
+				<div id="selectarea">
+					<div id="selectcolor">
+						<p>颜色：</p>
+						<div id="selcol">
+							<ul>
+								<li>
+									<div id="colorblock">
+										<span></span>
+										<p>白色</p>
+									</div>
+								</li>
+								<li>
+									<div id="colorblock"><span></span>
+										<p>黑色</p>
+									</div>
+								</li>
+								<li>
+									<div id="colorblock"><span></span>
+										<p>米色</p>
+									</div>
+								</li>
+								<li>
+									<div id="colorblock"><span></span>
+										<p>灰色</p>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id="sizearea">
+						<p>尺码：</p>
+						<div id="setsize">
+							<ul>
+								<li>
+									<p>M</p>
+								</li>
+								<li>
+									<p>L</p>
+								</li>
+								<li>
+									<p>XL</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div id="goodsnum">
+						<p>数量：</p>
+						<select>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select>
+					</div>
+					<div id="select">
+						<p>已选：</p>
+						<h2>白色&nbsp;</h2>
+						<i>M</i>
+						<span>现在有货</span>
+					</div>
+					<div id="shoppingnews">
+						<a href="#"><span>立即购买</span></a>
+						<a href="shopping.html" class="addcar" target="_blank"></a>
+					</div>
+				</div>
+
+				<div id="promotion">
+					<h4><span>优惠提示</span></h4>
+					<ul>
+						<li><span>免邮</span>全场购物满199元免运费</li>
+						<div id="promotion-bottom">
+							<span>优惠券</span>
+							<a href="#" class="top">满200减20</a>
+							<a href="#" class="bottom">新人有礼</a>
+						</div>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<footer></footer>
+	</body>
+</html>
+<script src="js/ajax.js"></script>
+<script src="js/MF.js"></script>
+<script src="js/jQuery.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("header").load("header.html", function() {
+			$(function() {
+				$("#nav1 li").hover(
+					function() {
+						$(this).find("ul").slideDown();
+					},
+					function() {
+						$(this).find("ul").slideUp();
+					}
+				);
+			});
+		});
+
+		$("footer").load("footer.html");
+
+		//划上颜色的li框加边框
+		$("#selcol ul li").click(function() {
+			$(this).css({
+				border: "1px solid #a10000"
+			}).siblings().css({
+				border: "1px solid #b4b4b4"
+			})
+			$("#select h2").html($(this).children().children().last().html());
+		})
+
+
+		//划上尺寸的li框加边框
+		$("#setsize ul li").click(function() {
+			$(this).css({
+				border: "1px solid #a10000"
+			}).siblings().css({
+				border: "1px solid #b4b4b4"
+			})
+			$("#select i").html($(this).children().html());
+		})
+		
+
+		//点击小图更换大图的背景图片
+		$("#selcol ul li").click(function() {
+			$("#small-box").css({
+				backgroundImage: $(this).find("span").css("backgroundImage")
+			});
+			$("#big-box").css({
+				backgroundImage: $(this).find("span").css("backgroundImage")
+			});
+		});
+		
+
+		//点击左边的li更换大图和小图的背景
+		$("#smallImg ul li").click(function() {
+			$("#small-box").css({
+				backgroundImage: $(this).find("span").css("backgroundImage")
+			});
+			$("#big-box").css({
+				backgroundImage: $(this).find("span").css("backgroundImage")
+			});
+			$(this).css({
+				border: "1px solid #a10000"
+			}).siblings().css({
+				border: "1px solid #b4b4b4"
+			})
+		});
+
+
+		//点击加入购物车
+		$("#shoppingnews .addcar").click(function() {
+			$.ajax({
+				type: "get",
+				url: "php/addcar.php",
+				isAsyn: true,
+				data: {
+					img: $("#small-box").css("backgroundImage"),
+					name: $("#text h2 span").html(),
+					size: $("#select i").html(),
+					score: "228",
+					price: $("#cuxiaoPrice strong").html(),
+					num: $("#goodsnum option").val(),
+					total: "0"
+				},
+				success: function fun(resText) {
+					// console.log(resText);
+				}
+			});
+		})
+
+
+		//从数据库中渲染商品名称，图片
+		$.ajax({
+			type: "get",
+			url: "php/detail.php",
+			isAsyn: true,
+			data: "",
+			success: function fun(resText) {
+				console.log(resText);
+				let arr = resText.split("<br/>");
+				console.log(arr);
+				let str = location.href.split("?id=");
+				console.log(str[1]);
+
+				for (let j = 0; j < arr.length; j++) {
+					let arr1 = arr[j].split(",");
+					if (str[1] == arr1[0]) {
+						let arr11 = arr1[4].split(";");
+						let arr12 = arr1[5].split(";");
+
+						for (let i = 0; i < $("#selcol #colorblock span").length; i++) {
+							$("#selcol #colorblock span").eq(i).css({
+								backgroundImage: "url(img/" + arr11[i] + ")"
+							});
+							$("#smallImg ul li span").eq(i).css({
+								backgroundImage: "url(img/" + arr11[i] + ")"
+							});
+						}
+						$("#text span").html(arr1[1]);
+						$(".tehuimoney strong").html(arr1[2]);
+						$(".change-price i").html(arr1[3]);
+						for (let i = 0; i < $("#colorblock p").length; i++) {
+							$("#colorblock p").eq(i).html(arr12[i]);
+						}
+						$("#small-box").css({
+							backgroundImage: "url(img/" + arr11[0] + ")"
+						});
+						$("#big-box").css({
+							backgroundImage: "url(img/" + arr11[0] + ")"
+						});
+
+
+						$("#selcol ul li").click(function() {
+							$("#text i").html($(this).children().html());
+						})
+
+						// for(let m = 0;m<arr12.length;m++){
+						// 	$("#smallImg li").click(function(){
+						// 		$("#text i").html(arr12[m]);
+						// 		console.log($("#smallImg li").eq(m));
+						// 	})
+						// }
+					}
+				}
+			}
+		})
+	});
+
+
+	//放大镜
+	let smallBox = document.querySelector("#small-box");
+	let bigBox = document.querySelector("#big-box");
+	let mask = document.querySelector("#mask");
+
+	let mf = new MF(smallBox, bigBox, mask);
+	mf.eventBind();
+</script>

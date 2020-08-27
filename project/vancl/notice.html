@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/header.css">
+		<link rel="stylesheet" type="text/css" href="css/footer.css">
+		<link rel="stylesheet" type="text/css" href="css/notice.css">
+		<link rel="stylesheet" type="text/css" href="font1/iconfont.css">
+	</head>
+	<body>
+		<header></header>
+		<div id="box">
+			<h2>VANCL客服中心重要提示</h2>
+			<div id="content-top">
+				<i>尊敬的凡客诚品客户：</i>
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您好！由于疫情影响，接到快递公司通知，现快递管控升级，发往北京及河北保定的快件将转为顺丰发货，这段时间内订单派送会有所延迟。<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;具体恢复时间待确认。<br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由此给您带来不便，请您谅解，再次感谢您对VANCL一如既往的支持与理解！</p>
+				
+			</div>
+			<div id="content-bottom">
+				<span>凡客诚品（北京）科技有限公司 客户服务中心<br>
+				2020年6月17日<br>
+				<img src="./img/logo18546.png"></span>
+			</div>
+		</div>
+		<footer></footer>
+	</body>
+</html>
+<script src="js/jQuery.js"></script>
+<script type="text/javascript">
+	$(function(){
+	$("header").load("header.html", function() {
+		//头部导航
+		$(function() {
+			$("#nav1 li").hover(
+				function() {
+					$(this).find("ul").stop().slideDown();
+				},
+				function() {
+					$(this).find("ul").stop().slideUp();
+				}
+			);
+		});
+		$("input").focus(function(){
+			$(this).val("");
+			$(this).css({border:"1px solid blue"})
+		});
+	});
+	
+	
+	$("footer").load("footer.html");
+	})
+</script>

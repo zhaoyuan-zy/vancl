@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/regist.css">
+	</head>
+	<body>
+		<div id="regist-logo" class="safe">
+			<img src="img/logo18546.png">
+		</div>
+		<form action="" class="safe">
+			<div id="regist-content" class="safe">
+				<h1>注册新用户<span>我已注册，现在就<a href="login.html" style="color: #CE6064;">登录</a></span></h1>
+
+				<div id="content-left">
+					<img src="./img/login120412_newlogo.jpg">
+				</div>
+				<div id="content-right">
+					<ul class="safe">
+						<li style="margin-top: 0px;">
+							<input type="text" name="" id="" placeholder="验证码" style="float:left">
+							<h2></h2>
+							<span>请输入验证码</span></li>
+						<li>
+							<input type="text" name="" id="" style="float:left" placeholder="请输入手机号">
+							<h2>获取短信验证</h2><span>请输入手机号</span>
+						</li>
+						<li>
+							<input type="text" name="" id="" style="width: 415px;" placeholder="填写手机验证码"><span>请输入短信验证码</span>
+						</li>
+						<li>
+							<input type="text" name="" id="" style="width: 415px;" placeholder="设定登录密码"><span>请设置密码</span>
+						</li>
+						<li>
+							<input type="text" name="" id="" style="width: 415px;" placeholder="再次输入密码"><span>请确认密码</span>
+						</li>
+					</ul>
+					<div id="read-xieyi">
+						<input type="checkbox" name="" id="" value=""><i>请阅读<a href="#">《VANCL凡客诚品服务条款》</a></i><span>请阅读凡客服务条款</span>
+						<input type="button" name="" id="" value="立即注册"></div>
+
+				</div>
+			</div>
+		</form>
+		<footer class="safe">
+			<div id="bottom">
+				<p>Copyright 2007 - 2020 vancl.com All Right Reserved京ICP证100557号 京公网安备11011502002400号 出版物经营许可证新出发京批字第直110138号</p>
+			</div>
+			<div id="footer-img" class="safe">
+				<a href="#"></a>
+				<a href="#"></a>
+				<a href="#"></a>
+				<a href="#"></a>
+			</div>
+		</footer>
+	</body>
+</html>
+<script src="js/ajax.js"></script>
+<script src="js/jQuery.js"></script>
+<script type="text/javascript">
+	let oRegistY = document.querySelectorAll("#content-right ul li h2");
+	var str = "";
+	randomNum();
+	oRegistY[0].innerHTML= str;
+	oRegistY[0].onclick= function(){
+		randomNum();
+		this.innerHTML= str;
+	}
+	oRegistY[1].onclick= function(){
+		randomNum();
+		this.innerHTML= str;
+	}
+	
+	function randomNum(){
+		var arr = "1234567890abcdefghlimnopqrstuvwxyz";
+		str="";
+			for (var i = 0; i < 6; i++) {
+				var a = arr.charAt(Math.round(Math.random() * 35));
+				str += a;
+			}
+			 return str;
+	}
+	
+	
+	//注册
+	let oInput = $("#content-right input");
+	let oH = $("#content-right ul li h2");
+	let oSpan = $("#content-right ul li span");
+	let flagRePh = false;
+	let flagRePw = false;
+	oInput.eq(6).click(function(){
+	new MyAjax({
+		"type":"get",
+		"url":"php/regist.php",
+		"isAsyn":true,
+		"data":"userphone="+oInput.eq(1).val()+"&userpwd="+oInput.eq(3).val(),
+		"callBack":fun
+	}).ajax();
+	
+	// if(oInput.eq(1).html()==oH.eq(1).html()){
+	// 	flagRePh = true;
+	// }else{
+	// 	flagRePh = false;
+	// }
+	
+	// if(oInput.eq(3).html()==oH.eq(4).html()){
+	// 	flagRePw = true;
+	// }else{
+	// 	flagRePw = false;
+	// }
+		
+		// if(oInputph.value == ""){
+		// 	oSpan[0].style.display = "block";
+		// 	oSpan[0].innerHTML = "用户名不能为空"	;	
+		// 	flagPhone = false;
+		// }else{
+		// 	oSpan[0].style.display = "none";
+		// 	flagPhone = true;
+		// }
+		// if(oInputpw.value == ""){
+		// 	oSpan[1].style.display = "block";
+		// 	oSpan[1].innerHTML = "密码不能为空";	
+		// 	flagPwd = false;
+		// }else{
+		// 	oSpan[1].style.display = "none";
+		// 	flagPwd = true;
+		// }
+		
+		
+		// if($("#read-xieyi input").eq(0)!=checked){
+		// 	$("#read-xieyi span").css({display:"block"});
+		// }
+		
+	function fun(resTest){
+		if(resTest == "1"){
+			location.href = "login.html";
+	}else if(resTest == "0"){
+		oSpan.eq(4).css({display:"block"});
+		oSpan.eq(4).html("该手机号已被注册");
+	}
+	}
+		
+	})
+	
+
+</script>
